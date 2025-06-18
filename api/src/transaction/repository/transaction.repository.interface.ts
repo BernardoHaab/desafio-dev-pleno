@@ -1,4 +1,8 @@
-import { Transaction, TransactionType } from '../transaction.entity';
+import {
+  BalanceSummary,
+  Transaction,
+  TransactionType,
+} from '../transaction.entity';
 
 export interface CreateTransactionData {
   description: string;
@@ -14,12 +18,6 @@ export interface UpdateTransactionData {
   type?: TransactionType;
   date?: Date;
   categoryId?: number;
-}
-
-export interface BalanceSummary {
-  income: number;
-  expense: number;
-  balance: number;
 }
 
 export abstract class TransactionRepository {

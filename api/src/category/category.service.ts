@@ -28,4 +28,13 @@ export class CategoryService {
   getCategoriesByUserId(userId: number) {
     return this.categoryRepository.findByUserId(userId);
   }
+
+  async hasCategory(userId: number, categoryId: number) {
+    const hasCategory = await this.categoryRepository.hasCategory(
+      userId,
+      categoryId,
+    );
+
+    return hasCategory;
+  }
 }

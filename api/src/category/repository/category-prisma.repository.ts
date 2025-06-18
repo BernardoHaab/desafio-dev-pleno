@@ -41,4 +41,24 @@ export class PrismaCategoryRepository implements CategoryRepository {
     });
     return !!category;
   }
+
+  async findById(userId: number, categoryId: number): Promise<Category | null> {
+    const category = await this.prisma.category.findFirst({
+      where: {
+        id: categoryId,
+        userId,
+      },
+    });
+    return category ? new Category(category) : null;
+  }
+
+  async hasCategory(userId: number, categoryId: number): Promise<boolean> {
+    const category = await this.prisma.category.findFirst({
+      where: {
+        id: categoryId,
+        userId,
+      },
+    });
+    return !!category;
+  }
 }

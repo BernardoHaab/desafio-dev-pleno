@@ -1,4 +1,3 @@
-import { Decimal } from 'generated/prisma/runtime/library';
 import { User } from 'src/user/user.entity';
 import { Category } from '../category/category.entity';
 
@@ -7,8 +6,10 @@ export enum TransactionType {
   EXPENSE = 'EXPENSE',
 }
 
-interface TransactionData extends Omit<Transaction, 'amount'> {
-  amount: Decimal;
+export interface BalanceSummary {
+  income: number;
+  expense: number;
+  balance: number;
 }
 
 export class Transaction {

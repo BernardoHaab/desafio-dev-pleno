@@ -4,9 +4,8 @@ import {
   Transaction as TransactionPrisma,
 } from 'generated/prisma';
 import { PrismaService } from 'src/database/prisma.service';
-import { Transaction } from '../transaction.entity';
+import { BalanceSummary, Transaction } from '../transaction.entity';
 import {
-  BalanceSummary,
   CreateTransactionData,
   TransactionRepository,
 } from './transaction.repository.interface';
@@ -16,7 +15,7 @@ interface TransactionPrismaFull extends TransactionPrisma {
 }
 
 @Injectable()
-export class PrismaCategoryRepository implements TransactionRepository {
+export class PrismaTransactionRepository implements TransactionRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(
@@ -44,12 +43,29 @@ export class PrismaCategoryRepository implements TransactionRepository {
     return this.transactionFromPrisma(transaction as TransactionPrismaFull);
   }
 
-  findAll(userId: number): Promise<Transaction[]> {
-    throw new Error('Method not implemented.');
+  async findAll(userId: number): Promise<Transaction[]> {
+    const transactions = await this.prisma.transaction.findMany({
+      where: { userId },
+      include: { category: true },
+      orderBy: { date: 'desc' },
+    });
+
+    return transactions.map((transaction) =>
+      this.transactionFromPrisma(transaction as TransactionPrismaFull),
+    );
   }
 
-  getBalanceBy(userId: number): Promise<BalanceSummary> {
-    throw new Error('Method not implemented.');
+  async getBalanceBy(userId: number): Promise<BalanceSummary> {
+    const balance = await this.prisma.$queryRaw<BalanceSummary[]>`
+      SELECT
+        SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END) AS income,
+        SUM(CASE WHEN type = 'EXPENSE' THEN amount ELSE 0 END) AS expense,
+        SUM(amount) AS balance
+      FROM Transaction
+      WHERE userId = ${userId}
+    `;
+
+    return balance[0] || { income: 0, expense: 0, balance: 0 };
   }
 
   private transactionFromPrisma(

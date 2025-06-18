@@ -10,4 +10,5 @@ export abstract class CategoryRepository {
   abstract create(userId: number, data: CreateCategoryData): Promise<Category>;
   abstract findByUserId(userId: number): Promise<Category[]>;
   abstract existsByName(userId: number, name: string): Promise<boolean>;
+  abstract hasCategory(userId: number, categoryId: number): Promise<boolean>;
 }
