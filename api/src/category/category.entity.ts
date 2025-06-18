@@ -1,4 +1,3 @@
-import { User } from 'src/user/user.entity';
 import { Transaction } from '../transaction/transaction.entity';
 
 export class Category {
@@ -9,6 +8,9 @@ export class Category {
   userId: number;
   createdAt: Date;
   updatedAt: Date;
-  user?: User;
   transactions?: Transaction[];
+
+  constructor(data: Partial<Category>) {
+    Object.assign(this, data);
+  }
 }

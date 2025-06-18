@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { User } from 'src/user/user.entity';
@@ -20,7 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       jwtPayload.email,
     );
     if (!user) {
-      throw new HttpException('Não autorizado', HttpStatus.UNAUTHORIZED);
+      throw new UnauthorizedException('Não autorizado');
     }
     return user;
   }
