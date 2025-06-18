@@ -5,7 +5,7 @@ export class User {
   id: number;
   name: string;
   email: string;
-  password?: string; // Opcional para não expor em responses
+  password: string; // Opcional para não expor em responses
   createdAt: Date;
   updatedAt: Date;
   categories: Category[] | null; // Pode ser null se o usuário não tiver categorias
