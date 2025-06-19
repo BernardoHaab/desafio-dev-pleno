@@ -5,6 +5,8 @@ export enum TransactionType {
   EXPENSE = 'EXPENSE',
 }
 
+export const transactionTypes: [string, string] = ['INCOME', 'EXPENSE'];
+
 export interface Transaction {
   id: number;
   description: string;
@@ -12,6 +14,14 @@ export interface Transaction {
   type: TransactionType;
   date: string;
   category?: Category;
+}
+
+export interface NewTransactionDto {
+  description: string;
+  amount: number;
+  type: (typeof transactionTypes)[number];
+  date: string;
+  categoryId?: number;
 }
 
 export interface Balance {

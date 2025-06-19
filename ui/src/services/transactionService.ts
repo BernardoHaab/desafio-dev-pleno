@@ -12,7 +12,7 @@ export const transactionService = {
     return response.data;
   },
 
-  addTransaction: async (
+  createTransaction: async (
     transaction: NewTransactionDto,
   ): Promise<Transaction> => {
     const response = await api.post('/transaction/create', transaction);

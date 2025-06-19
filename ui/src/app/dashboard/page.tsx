@@ -12,9 +12,11 @@ import { TransactionRow } from '@/app/dashboard/components/TransactionRow';
 import { transactionService } from '@/services/transactionService';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import { TransactionModal } from './components/TransactionModal';
 
 export default function DashboardPage() {
   const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [showTransactionModal, setShowTransactionModal] = useState(false);
 
   const transactionsQuery = useQuery({
     queryKey: ['transactions'],
@@ -29,8 +31,7 @@ export default function DashboardPage() {
   });
 
   const handleAddTransaction = () => {
-    // Handle add transaction logic
-    console.log('Add transaction clicked');
+    setShowTransactionModal(true);
   };
 
   const handleAddCategory = () => {
@@ -151,6 +152,11 @@ export default function DashboardPage() {
       <CategoryModal
         isOpen={showCategoryModal}
         onClose={() => setShowCategoryModal(false)}
+      />
+
+      <TransactionModal
+        isOpen={showTransactionModal}
+        onClose={() => setShowTransactionModal(false)}
       />
     </div>
   );
