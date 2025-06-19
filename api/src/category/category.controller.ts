@@ -17,4 +17,10 @@ export class CategoryController {
   ) {
     return this.categoryService.createCategory(user.id, newCategory);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('list')
+  async getCategoriesByUserId(@UserDecorator() user: User) {
+    return this.categoryService.getCategoriesByUserId(user.id);
+  }
 }
