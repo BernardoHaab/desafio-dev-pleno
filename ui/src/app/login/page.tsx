@@ -1,13 +1,12 @@
 'use client';
 
 import { Button } from '@/components/Buttons';
-import { authService } from '@/services/authService';
+import { AuthContext } from '@/context/AuthContext';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -19,18 +18,13 @@ const loginSchema = z.object({
 type LoginForm = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
+  const { login } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const loginMutation = useMutation({
-    mutationFn: authService.login,
+    mutationFn: login,
     onSuccess: (data) => {
-      Cookies.set('token', data.access_token, {
-        expires: 2, // 2 days
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-      });
-
       setLoading(false);
       router.push('/dashboard');
     },
