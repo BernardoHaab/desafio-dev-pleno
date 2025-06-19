@@ -14,6 +14,7 @@ export class AuthController {
     return this.authService.register(registerUserDto);
   }
 
+  // ToDo: send JWT in cookie
   @Post('login')
   async login(@Body() loginUserDto: LoginDto): Promise<any> {
     return await this.authService.login(loginUserDto);

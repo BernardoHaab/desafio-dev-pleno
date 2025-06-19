@@ -58,11 +58,11 @@ export class PrismaTransactionRepository implements TransactionRepository {
   async getBalanceBy(userId: number): Promise<BalanceSummary> {
     const balance = await this.prisma.$queryRaw<BalanceSummary[]>`
       SELECT
-        SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END) AS income,
-        SUM(CASE WHEN type = 'EXPENSE' THEN amount ELSE 0 END) AS expense,
+        SUM(CASE WHEN type = 'income' THEN amount ELSE 0 END) AS income,
+        SUM(CASE WHEN type = 'expense' THEN amount ELSE 0 END) AS expense,
         SUM(amount) AS balance
-      FROM Transaction
-      WHERE userId = ${userId}
+      FROM transactions
+      WHERE user_id = ${userId}
     `;
 
     return balance[0] || { income: 0, expense: 0, balance: 0 };
