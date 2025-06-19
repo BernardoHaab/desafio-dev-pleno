@@ -3,24 +3,28 @@
 import { DollarSign, TrendingDown, TrendingUp } from 'lucide-react';
 // import { useDashboardQueries } from '@/hooks/useDashboard';
 import { BalanceCard } from '@/app/dashboard/components/BalanceCard';
+import { CategoryModal } from '@/app/dashboard/components/CategoryModal';
 import { DashboardHeader } from '@/app/dashboard/components/DashboardHeader';
 import { ErrorCard } from '@/app/dashboard/components/ErrorCard';
 import { SkeletonCard } from '@/app/dashboard/components/SkeletonCard';
 import { SkeletonRow } from '@/app/dashboard/components/SkeletonRow';
 import { TransactionRow } from '@/app/dashboard/components/TransactionRow';
-import { dashboardService } from '@/services/dashboardService';
+import { transactionService } from '@/services/transactionService';
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
 export default function DashboardPage() {
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+
   const transactionsQuery = useQuery({
     queryKey: ['transactions'],
-    queryFn: dashboardService.getTransactions,
+    queryFn: transactionService.getTransactions,
     initialData: [],
   });
 
   const balanceQuery = useQuery({
     queryKey: ['balance'],
-    queryFn: dashboardService.getBalance,
+    queryFn: transactionService.getBalance,
     initialData: { income: 0, expense: 0, balance: 0 },
   });
 
@@ -29,12 +33,16 @@ export default function DashboardPage() {
     console.log('Add transaction clicked');
   };
 
-  console.log('Transtions loading:', transactionsQuery.isFetching);
-  console.log('Balance loading:', balanceQuery.isFetching);
+  const handleAddCategory = () => {
+    setShowCategoryModal(true);
+  };
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
-      <DashboardHeader onAddTransaction={handleAddTransaction} />
+      <DashboardHeader
+        onAddTransaction={handleAddTransaction}
+        onAddCategory={handleAddCategory}
+      />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {/* Receitas Card */}
         {balanceQuery.isFetching ? (
@@ -139,6 +147,11 @@ export default function DashboardPage() {
           </table>
         </div>
       </div>
+
+      <CategoryModal
+        isOpen={showCategoryModal}
+        onClose={() => setShowCategoryModal(false)}
+      />
     </div>
   );
 }

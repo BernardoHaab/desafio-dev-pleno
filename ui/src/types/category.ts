@@ -4,3 +4,9 @@ export interface Category {
   description: string | null;
   color: string;
 }
+
+export interface NewCategoryDto {
+  name: string;
+  description?: string | null;
+  color: string;
+}

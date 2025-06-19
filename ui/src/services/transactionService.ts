@@ -1,7 +1,7 @@
 import api from '@/lib/api';
-import { Balance, Transaction } from '@/types/transaction';
+import { Balance, NewTransactionDto, Transaction } from '@/types/transaction';
 
-export const dashboardService = {
+export const transactionService = {
   getTransactions: async (): Promise<Transaction[]> => {
     const response = await api.get('/transaction/list');
     return response.data;
@@ -9,6 +9,13 @@ export const dashboardService = {
 
   getBalance: async (): Promise<Balance> => {
     const response = await api.get('/transaction/balance');
+    return response.data;
+  },
+
+  addTransaction: async (
+    transaction: NewTransactionDto,
+  ): Promise<Transaction> => {
+    const response = await api.post('/transaction/create', transaction);
     return response.data;
   },
 };
