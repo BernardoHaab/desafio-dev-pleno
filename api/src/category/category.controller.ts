@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwat-auth.guard';
 import { UserDecorator } from 'src/user/user.decorator';
 import { User } from 'src/user/user.entity';
@@ -19,7 +19,7 @@ export class CategoryController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('list')
+  @Get('list')
   async getCategoriesByUserId(@UserDecorator() user: User) {
     return this.categoryService.getCategoriesByUserId(user.id);
   }
