@@ -1,4 +1,8 @@
-import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import {
+  createParamDecorator,
+  ExecutionContext,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { User } from './user.entity';
 
 export const UserDecorator = createParamDecorator(
@@ -6,7 +10,7 @@ export const UserDecorator = createParamDecorator(
     ctx.switchToHttp().getRequest();
     const request = ctx.switchToHttp().getRequest<{ user?: User }>();
     if (!request || !request.user) {
-      throw new Error('User not found in request');
+      throw new UnauthorizedException('Usuário não encontrado na requisição');
     }
     return request.user;
   },
