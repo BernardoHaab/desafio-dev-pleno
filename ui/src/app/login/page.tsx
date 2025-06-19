@@ -25,7 +25,6 @@ export default function LoginPage() {
   const loginMutation = useMutation({
     mutationFn: authService.login,
     onSuccess: (data) => {
-      // Store the token
       Cookies.set('token', data.access_token, {
         expires: 2, // 2 days
         secure: process.env.NODE_ENV === 'production',
@@ -54,19 +53,6 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginForm) => {
     loginMutation.mutate(data);
-    // setLoading(true);
-    // try {
-    //   const response = await api.post('/auth/login', data);
-    //   Cookies.set('token', response.data.access_token);
-    //   router.push('/dashboard');
-    // } catch (error: unknown) {
-    //   const err = error as AxiosError;
-    //   setError('root', {
-    //     message: err.response?.data?.message || 'Erro ao fazer login',
-    //   });
-    // } finally {
-    //   setLoading(false);
-    // }
   };
 
   return (
