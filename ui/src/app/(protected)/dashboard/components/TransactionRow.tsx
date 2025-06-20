@@ -18,6 +18,9 @@ export function TransactionRow({ transaction }: TransactionRowProps) {
           <span
             className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-white"
             style={{ backgroundColor: transaction.category.color }}
+            title={
+              transaction.category.description || transaction.category.name
+            }
           >
             {transaction.category.name}
           </span>

@@ -1,4 +1,4 @@
-import { Button } from '@/components/Buttons';
+import { Button } from '@/components/Button';
 import { useCreateCategory } from '@/hooks/useCategory';
 import { colorOptions } from '@/utils/colors';
 import { CategoryForm, categorySchema } from '@/utils/validations';

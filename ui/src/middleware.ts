@@ -2,12 +2,10 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { authService } from './services/authService';
 
-const publicRoutes = ['/login', '/signup', '/'];
 const privateRoutes = ['/dashboard'];
 
 export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
-  const isPublicRoute = publicRoutes.includes(path);
   const isPrivateRoute = privateRoutes.includes(path);
 
   const cookie = (await cookies()).get('token')?.value;
@@ -24,5 +22,5 @@ export default async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: privateRoutes,
+  matcher: ['/dashboard'],
 };

@@ -1,4 +1,4 @@
-import { Button } from '@/components/Buttons';
+import { Button } from '@/components/Button';
 import { CategorySelect } from '@/components/CategorySelect';
 import { transactionService } from '@/services/transactionService';
 import { TransactionType } from '@/types/transaction';

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/Buttons';
+import { Button } from '@/components/Button';
 import { authService } from '@/services/authService';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
@@ -30,8 +30,9 @@ export default function RegisterPage() {
       router.push('/login');
     },
     onError: (error: AxiosError) => {
+      const errorData = error.response?.data as { message?: string };
       setError('root', {
-        message: error.response?.data?.message || 'Erro ao cadastrar usuário',
+        message: errorData?.message || 'Erro ao cadastrar usuário',
       });
       setLoading(false);
     },

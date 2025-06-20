@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/Buttons';
+import { Button } from '@/components/Button';
 import { AuthContext } from '@/context/AuthContext';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
@@ -25,13 +25,15 @@ export default function LoginPage() {
 
   const loginMutation = useMutation({
     mutationFn: login,
-    onSuccess: (data) => {
+    onSuccess: () => {
       setLoading(false);
       router.push('/dashboard');
     },
     onError: (error: AxiosError) => {
+      const errorData = error.response?.data as { message?: string };
+
       setError('root', {
-        message: error.response?.data?.message || 'Erro ao fazer login',
+        message: errorData?.message || 'Erro ao fazer login',
       });
       setLoading(false);
     },
