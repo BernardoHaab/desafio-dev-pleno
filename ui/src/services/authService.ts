@@ -1,5 +1,5 @@
 import api from '@/lib/api';
-import { LoginRequest, LoginResponse } from '@/types/auth';
+import { LoginRequest, LoginResponse, RegisterRequest } from '@/types/auth';
 import { User } from '@/types/user';
 import Cookies from 'js-cookie';
 
@@ -15,6 +15,16 @@ export const authService = {
       sameSite: 'Strict',
     });
     return response.data;
+  },
+
+  async register({ name, email, password }: RegisterRequest) {
+    await api.post('/auth/register', {
+      name,
+      email,
+      password,
+    });
+
+    return true;
   },
 
   logout() {

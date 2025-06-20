@@ -1,5 +1,5 @@
 import { PlusCircle } from 'lucide-react';
-import { Button } from '../../../components/Buttons';
+import { Button } from '../../../../components/Buttons';
 
 interface DashboardHeaderProps {
   onAddTransaction?: () => void;

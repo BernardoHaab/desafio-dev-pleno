@@ -5,7 +5,7 @@ import { CategoryForm, categorySchema } from '@/utils/validations';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Modal } from '../../../components/Modal';
+import { Modal } from '../../../../components/Modal';
 
 interface CategoryModalProps {
   isOpen: boolean;

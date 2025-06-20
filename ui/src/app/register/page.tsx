@@ -1,37 +1,37 @@
 'use client';
 
 import { Button } from '@/components/Buttons';
-import { AuthContext } from '@/context/AuthContext';
+import { authService } from '@/services/authService';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 const loginSchema = z.object({
+  name: z.string().min(1, 'Nome é obrigatório'),
   email: z.string().email('Email inválido'),
   password: z.string().min(6, 'Senha deve ter pelo menos 6 caracteres'),
 });
 
 type LoginForm = z.infer<typeof loginSchema>;
 
-export default function LoginPage() {
-  const { login } = useContext(AuthContext);
+export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const loginMutation = useMutation({
-    mutationFn: login,
-    onSuccess: (data) => {
+    mutationFn: authService.register,
+    onSuccess: () => {
       setLoading(false);
-      router.push('/dashboard');
+      router.push('/login');
     },
     onError: (error: AxiosError) => {
       setError('root', {
-        message: error.response?.data?.message || 'Erro ao fazer login',
+        message: error.response?.data?.message || 'Erro ao cadastrar usuário',
       });
       setLoading(false);
     },
@@ -55,10 +55,23 @@ export default function LoginPage() {
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Entrar na conta
+            Criar nova conta
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label htmlFor="name" className="sr-only">
+              Nome
+            </label>
+            <input
+              {...register('name')}
+              className="relative block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              placeholder="Nome"
+            />
+            {errors.name && (
+              <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+            )}
+          </div>
           <div>
             <label htmlFor="email" className="sr-only">
               Email
@@ -100,16 +113,17 @@ export default function LoginPage() {
 
           <div>
             <Button type="submit" disabled={loading} className="w-full">
-              {loading ? 'Entrando...' : 'Entrar'}
+              {loading ? 'Cadastrando...' : 'Criar conta'}
             </Button>
           </div>
+
           <div className="text-center text-sm text-gray-600">
-            Não tem uma conta?{' '}
+            Já tem uma conta?{' '}
             <Link
-              href="/register"
+              href="/login"
               className="text-indigo-600 hover:text-indigo-500"
             >
-              Criar conta
+              Entrar
             </Link>
           </div>
         </form>

@@ -1,3 +1,4 @@
+'use client';
 import { authService } from '@/services/authService';
 import { LoginRequest } from '@/types/auth';
 import { User } from '@/types/user';

@@ -2,13 +2,13 @@
 
 import { DollarSign, TrendingDown, TrendingUp } from 'lucide-react';
 // import { useDashboardQueries } from '@/hooks/useDashboard';
-import { BalanceCard } from '@/app/dashboard/components/BalanceCard';
-import { CategoryModal } from '@/app/dashboard/components/CategoryModal';
-import { DashboardHeader } from '@/app/dashboard/components/DashboardHeader';
-import { ErrorCard } from '@/app/dashboard/components/ErrorCard';
-import { SkeletonCard } from '@/app/dashboard/components/SkeletonCard';
-import { SkeletonRow } from '@/app/dashboard/components/SkeletonRow';
-import { TransactionRow } from '@/app/dashboard/components/TransactionRow';
+import { BalanceCard } from '@/app/(protected)/dashboard/components/BalanceCard';
+import { CategoryModal } from '@/app/(protected)/dashboard/components/CategoryModal';
+import { DashboardHeader } from '@/app/(protected)/dashboard/components/DashboardHeader';
+import { ErrorCard } from '@/app/(protected)/dashboard/components/ErrorCard';
+import { SkeletonCard } from '@/app/(protected)/dashboard/components/SkeletonCard';
+import { SkeletonRow } from '@/app/(protected)/dashboard/components/SkeletonRow';
+import { TransactionRow } from '@/app/(protected)/dashboard/components/TransactionRow';
 import { transactionService } from '@/services/transactionService';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';

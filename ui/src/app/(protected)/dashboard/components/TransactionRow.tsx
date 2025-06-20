@@ -1,5 +1,5 @@
 import { Transaction, TransactionType } from '@/types/transaction';
-import { formatCurrency, formatDate } from '../../../utils/formatters';
+import { formatCurrency, formatDate } from '../../../../utils/formatters';
 
 interface TransactionRowProps {
   transaction: Transaction;

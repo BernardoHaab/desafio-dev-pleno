@@ -1,5 +1,5 @@
 import { LucideIcon } from 'lucide-react';
-import { formatCurrency } from '../../../utils/formatters';
+import { formatCurrency } from '../../../../utils/formatters';
 
 interface BalanceCardProps {
   title: string;

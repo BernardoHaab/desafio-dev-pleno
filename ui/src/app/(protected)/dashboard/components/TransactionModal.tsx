@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Modal } from '../../../components/Modal';
+import { Modal } from '../../../../components/Modal';
 
 interface TransactionModalProps {
   isOpen: boolean;
