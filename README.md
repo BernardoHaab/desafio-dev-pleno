@@ -10,6 +10,22 @@ Este projeto é uma aplicação full-stack para controle financeiro pessoal, per
 - **Frontend**: https://psa-desafio-dev-pleno.vercel.app/
 - **API Docs**: https://desafio-dev-pleno.onrender.com/swagger
 
+## 🎯 Próximas Implementações
+
+### 📱 Interface do Usuário
+- **Design System Aprimorado**: Implementação de uma paleta de cores moderna e profissional com melhor contraste e acessibilidade
+- **Responsividade**: Otimizar responsividades em dispositivos móveis e tablets, garantindo uma experiência fluida em qualquer tela
+
+### ⚙️ Novas Funcionalidades
+- **CRUD Completo de Categorias**: Implementação das funcionalidades de edição e exclusão de categorias financeiras
+- **Gestão Completa de Transações**: Adição de recursos para editar e remover transações existentes com histórico de alterações
+- **Gerenciamento de Perfil**: Sistema completo para edição e exclusão de conta do usuário com confirmação de segurança
+- **Filtro e Paginação de Transações**: Implementar sistam de filtros e páginação na busca de transações
+
+### 🔧 Melhorias Técnicas
+- **Documentação Swagger Otimizada**: Refatoração dos controllers para reduzir verbosidade e melhorar a legibilidade da documentação automática
+- **Testes Automatizados**: Cobertura completa de testes unitários e de integração para ambos frontend e backend
+
 ## ⚡ Características Principais
 
 - 🔐 **Autenticação Segura**: Sistema de login/registro com JWT
