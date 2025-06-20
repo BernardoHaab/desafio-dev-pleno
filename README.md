@@ -1,92 +1,177 @@
-# 💼 Desafio Técnico Dev Fullstack Pleno
-Este é um desafio técnico para a vaga de Desenvolvedor Pleno. Seu objetivo é desenvolver uma aplicação movimentações financeiras, com autenticação de usuário, associação de categorias e persistência em banco de dados.
+# 💼 Sistema de Gestão Financeira Pessoal
 
-## 🧰 Requisitos Técnicos
-- Usar a estrutura inicial deste repositório (API utilizando NestJS e UI utilizando NextJS+Tailwind).
-- Login de usuário.
-- Cadastro de Usuários.
-- Cadastro de Movimentações.
-- Cadastro de Categorias
-- As movimentações devem ser associadas ao usuário autenticado.
+Um sistema de gestão de movimentações financeiras com autenticação de usuários, categorização de transações e relatórios em tempo real.
 
-## ✅ O que será avaliado?
+## 🌟 Visão Geral
 
-- **📁 Organização do Código**  
-  Estrutura clara de pastas e arquivos, padronização e uso adequado de convenções do framework.
+Este projeto é uma aplicação full-stack para controle financeiro pessoal, permitindo que usuários registrem, categorizem e monitorem suas receitas e despesas de forma intuitiva e segura.
 
-- **🧹 Legibilidade e Clareza**  
-  Código limpo, bem nomeado e fácil de entender. Comentários úteis (quando necessário) e ausência de complexidade desnecessária.
+### 🔗 Demonstração
+- **Frontend**: https://psa-desafio-dev-pleno.vercel.app/
+- **API Docs**: https://desafio-dev-pleno.onrender.com/swagger
 
-- **🛠️ Boas Práticas de Desenvolvimento**  
-  Uso de princípios como DRY (Don't Repeat Yourself), SOLID, controle de erros, validações e segurança básica.
+## ⚡ Características Principais
 
-- **💾 Persistência de Dados**  
-  Implementação correta de banco de dados, com relacionamentos adequados entre usuários, categorias e movimentações.  
-  **Dica:** Use um ORM 👀
+- 🔐 **Autenticação Segura**: Sistema de login/registro com JWT
+- 💰 **Gestão de Transações**: Registre receitas e despesas com facilidade
+- 🏷️ **Categorização**: Organize suas movimentações com categorias personalizáveis
+- 📊 **Dashboard Interativo**: Visualize seu saldo, receitas e despesas em tempo real
+- 🛡️ **Validação Robusta**: Dados sempre consistentes e seguros
 
-- **📝 Documentação**  
-  README com orientações completas sobre instalação*, execução e stack utilizada.  
-  A API deve estar documentada com **Swagger**.
+## 🛠️ Stack Tecnológica
 
-> ⚠️ **Importante:** Projetos que **não rodarem seguindo as instruções do README** poderão **ser desconsiderados** na avaliação.
+### Backend (API)
+- **NestJS** - Framework Node.js escalável
+- **Prisma ORM** - Gerenciamento de banco de dados
+- **PostgreSQL** - Banco de dados relacional
+- **JWT** - Autenticação baseada em tokens
+- **Swagger** - Documentação automática da API
 
+### Frontend (UI)
+- **Next.js 14+** - Framework React com App Router
+- **TypeScript** - Tipagem estática
+- **Tailwind CSS** - Framework de CSS utilitário
+- **TanStack Query** - Gerenciamento de estado servidor
+- **React Hook Form** - Formulários performáticos
+- **Zod** - Validação de schemas
 
-## 🌟 Diferenciais
-Não são obrigatórios, mas serão considerados um **bônus** na sua avaliação:
+## 🚀 Como Executar o Projeto
 
-- 🧪 **Testes Automatizados**  
-  Cobertura de testes (unitários e/ou de integração).
+### Pré-requisitos
+- Node.js 18+
+- PostgreSQL
+- npm ou yarn
 
-- 📱 **Responsividade no Frontend**  
-  Interface adaptada para diferentes tamanhos de tela.
+### 1. Clone o repositório
+```bash
+git clone https://github.com/BernardoHaab/desafio-dev-pleno
+cd desafio-dev-pleno
+```
 
-- 🚀 **Deploy do Projeto**  
-  Aplicação hospedada (ex: Vercel, Netlify, Render, Railway, etc), com link acessível no README.
+### 2. Configure o Backend
+```bash
+cd api
 
-- 🛡️ **Tratamento de Erros e Validações**  
-  Respostas consistentes e mensagens claras de erro na API.
+# Instale as dependências
+npm install
 
-- 🧩 **Arquitetura Escalável**  
-  Separação por camadas (ex: controllers, services, repositories), facilitando manutenção e evolução do projeto.
+# Configure as variáveis de ambiente
+cp .env.example .env
+# Edite o .env com suas configurações de banco
 
-- 🗂️ **Documentação Extra**  
-  Diagramas, fluxos ou qualquer outro material que ajude a entender a arquitetura ou decisões técnicas.
+# Execute as migrations
+npx prisma migrate dev
+npx prisma generate
+
+# Inicie o servidor
+npm run start:dev
+```
+
+A API estará disponível em `http://localhost:3001`
+
+### 3. Configure o Frontend
+```bash
+cd ../ui
+
+# Instale as dependências
+npm install
+
+# Configure as variáveis de ambiente
+cp .env.example .env
+# Configure NEXT_PUBLIC_API_URL=http://localhost:3001
+
+# Inicie o desenvolvimento
+npm run dev
+```
+
+O frontend estará disponível em `http://localhost:3000`
 
 ## 📁 Estrutura do Projeto
 
-O projeto está dividido em duas aplicações separadas:
-```text
-📦 projeto-raiz/
-├── 📁 api/                      # Backend (NestJS)
-│   ├── 📁 node_modules/
-│   ├── 📁 src/                  # Código-fonte da API
-│   ├── 📁 test/                 # Testes automatizados
-│   ├── ...
-│
-├── 📁 ui/                       # Frontend (Next.js)
-│   ├── 📁 node_modules/
-│   ├── 📁 public/               # Arquivos estáticos
+```
+📦 desafio-dev-pleno/
+├── 📁 api/                      # Backend NestJS
 │   ├── 📁 src/
-│   │   └── 📁 app/              # Código-fonte do frontend
-│   ├── ...
+│   │   ├── 📁 auth/            # Autenticação JWT
+│   │   ├── 📁 user/            # Gestão de usuários
+│   │   ├── 📁 category/        # Categorias
+│   │   ├── 📁 transaction/     # Transações financeiras
+│   │   └── 📁 database/        # Configuração Prisma
+│   ├── 📁 prisma/              # Schema e migrations
+│   └── 📄 README.md
+│
+├── 📁 ui/                       # Frontend Next.js
+│   ├── 📁 src/
+│   │   ├── 📁 app/             # Páginas (App Router)
+│   │   ├── 📁 components/      # Componentes reutilizáveis
+│   │   ├── 📁 services/        # Cliente API
+│   │   ├── 📁 types/           # Tipos TypeScript
+│   │   └── 📁 utils/           # Utilitários
+│   └── 📄 README.md
+│
+└── 📄 README.md                 # Este arquivo
 ```
 
-## 🗄️ Banco de Dados
-Se sua aplicação utilizar **banco de dados relacional** (como PostgreSQL, MySQL, etc), é **obrigatório** fornecer um dos seguintes:
+## 🔧 Configuração do Banco de Dados
 
-- Script SQL para criação das tabelas e estruturas necessárias  
-  **ou**
-- Migrations configuradas e executáveis via ORM.
+### PostgreSQL Setup
+1. Crie um banco de dados PostgreSQL
+2. Crie um schema chamado `psa`
+3. Configure a `DATABASE_URL` no arquivo `.env` da API:
+```env
+DATABASE_URL="postgresql://usuario:senha@localhost:5432/nome_do_banco"
+```
 
-> ⚠️ **Importante:** Sem essas informações, **não será possível rodar a aplicação**, e ela poderá ser **desconsiderada** na avaliação.
+### Migrations
+As migrations do Prisma criarão automaticamente as tabelas necessárias:
+- `users` - Usuários do sistema
+- `categories` - Categorias de transações
+- `transactions` - Movimentações financeiras
 
-## ⏱️ Prazo de entrega sugerido:
-3 a 5 dias corridos. Qualidade importa mais do que velocidade.
+## 📖 Documentação da API
 
-## 🚀 Como Enviar sua Solução
-- 🔀 Faça um Fork deste repositório para a sua conta no GitHub.
-- 🧑🏽‍💻 Implemente a sua solução no repositório forkado.
-- 🌐 Certifique-se de que o repositório esteja público.
-- 📩 Envie o link do seu repositório para o e-mail:
-  - ti@profissionaissa.com
-  - Com cópia para: jonata.martins@profissionaissa.com
+Após executar o backend, acesse a documentação Swagger em:
+```
+http://localhost:3001/swagger
+```
+
+### Principais Endpoints
+
+- `POST /auth/register` - Registro de usuário
+- `POST /auth/login` - Login
+- `GET /auth/validate-token` - Validação de token
+- `GET /category/list` - Listar categorias
+- `POST /category/create` - Criar categoria
+- `GET /transaction/list` - Listar transações
+- `POST /transaction/create` - Criar transação
+- `GET /transaction/balance` - Obter saldo
+
+## 🌍 Variáveis de Ambiente
+
+### Backend (.env)
+```env
+DATABASE_URL="postgresql://user:pass@localhost:5432/db"
+JWT_SECRET="seu-jwt-secret-muito-seguro"
+JWT_EXPIRATION="7d"
+CORS_ORIGIN="http://localhost:3000"
+PORT=3001
+```
+
+### Frontend (.env)
+```env
+NEXT_PUBLIC_API_URL="http://localhost:3001"
+```
+
+## 🚀 Deploy
+
+### Backend
+1. Configure as variáveis de ambiente em produção
+2. Execute as migrations: `npx prisma migrate deploy`
+3. Build: `npm run build`
+4. Start: `npm run start:prod`
+
+### Frontend
+1. Configure `NEXT_PUBLIC_API_URL` para a URL da API em produção
+2. Build: `npm run build`
+3. Start: `npm run start`
+
