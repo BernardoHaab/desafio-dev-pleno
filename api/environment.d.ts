@@ -4,6 +4,7 @@ declare global {
       DATABASE_URL: string;
       JWT_SECRET: string;
       JWT_EXPIRATION: string;
+      CORS_ORIGIN: string;
     }
   }
 }
