@@ -61,7 +61,7 @@ export class PrismaTransactionRepository implements TransactionRepository {
         SUM(CASE WHEN type = 'income' THEN amount ELSE 0 END) AS income,
         SUM(CASE WHEN type = 'expense' THEN amount ELSE 0 END) AS expense,
         SUM(CASE WHEN type = 'income' THEN amount ELSE amount*-1 END) AS balance
-      FROM transactions
+      FROM psa.transactions
       WHERE user_id = ${userId}
     `;
 
